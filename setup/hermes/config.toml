@@ -91,10 +91,10 @@ port = 3001
 
 [[chains]]
 id = 'test-1'
-#rpc_addr = 'http://neutron-node:26657'
-rpc_addr = 'http://localhost:26657'
-grpc_addr = 'http://localhost:8090'
-event_source = { mode = 'push', url = 'ws://localhost:26657/websocket', batch_delay = '200ms' }
+rpc_addr = 'http://neutron-node:26657'
+# rpc_addr = 'http://localhost:26657'
+grpc_addr = 'http://neutron-node:9090'
+event_source = { mode = 'push', url = 'ws://neutron-node:26657/websocket', batch_delay = '200ms' }
 ccv_consumer_chain = true
 rpc_timeout = '10s'
 account_prefix = 'neutron'
@@ -114,10 +114,10 @@ address_type = { derivation = 'cosmos' }
 
 [[chains]]
 id = 'test-2'
-#rpc_addr = 'http://gaia-node:26657'
-rpc_addr = 'http://localhost:16657'
-grpc_addr = 'http://localhost:9090'
-event_source = { mode = 'push', url = 'ws://localhost:16657/websocket', batch_delay = '200ms' }
+rpc_addr = 'http://gaia-node:26657'
+# rpc_addr = 'http://localhost:16657'
+grpc_addr = 'http://gaia-node:9090'
+event_source = { mode = 'push', url = 'ws://gaia-node:26657/websocket', batch_delay = '200ms' }
 rpc_timeout = '10s'
 account_prefix = 'cosmos'
 key_name = 'testkey_2'

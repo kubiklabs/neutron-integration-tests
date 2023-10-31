@@ -31,6 +31,8 @@ services:
       - STAKEDENOM=uatom
       - ALLOW_ICA_EXEC=yes
       - RUN_BACKGROUND=0
+    networks:
+      - neutron-testing
   # osmosis-node:
   #   image: osmosis-node:latest
   #   container_name: osmosis-node
@@ -52,8 +54,8 @@ services:
   #     - STAKEDENOM=uosmo
   #     - ALLOW_ICA_EXEC=yes
   #     - RUN_BACKGROUND=0
-  #   networks:
-  #     - neutron-testing
+    # networks:
+    #   - neutron-testing
   hermes:
     image: hermes:1.6.0-1c1cf029
     depends_on:
