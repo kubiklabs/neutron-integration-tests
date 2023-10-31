@@ -31,37 +31,35 @@ services:
       - STAKEDENOM=uatom
       - ALLOW_ICA_EXEC=yes
       - RUN_BACKGROUND=0
-
-  osmosis-node:
-    image: osmosis-node:latest
-    container_name: osmosis-node
-    volumes:
-      - data:/opt/osmosis/data
-    ports:
-      - 1316:1317
-      - 16657:26657
-      - 16656:26656
-      - 9090:9090
-    ports:
-      - 1325:1317
-      - 26665:26657
-      - 26664:26656
-      - 9094:9090
-    environment:
-      - BINARY=osmosisd
-      - CHAINID=test-3
-      - STAKEDENOM=uosmo
-      - ALLOW_ICA_EXEC=yes
-      - RUN_BACKGROUND=0
-    networks:
-      - neutron-testing
-
+  # osmosis-node:
+  #   image: osmosis-node:latest
+  #   container_name: osmosis-node
+  #   volumes:
+  #     - data:/opt/osmosis/data
+  #   ports:
+  #     - 1316:1317
+  #     - 16657:26657
+  #     - 16656:26656
+  #     - 9090:9090
+  #   ports:
+  #     - 1325:1317
+  #     - 26665:26657
+  #     - 26664:26656
+  #     - 9094:9090
+  #   environment:
+  #     - BINARY=osmosisd
+  #     - CHAINID=test-3
+  #     - STAKEDENOM=uosmo
+  #     - ALLOW_ICA_EXEC=yes
+  #     - RUN_BACKGROUND=0
+  #   networks:
+  #     - neutron-testing
   hermes:
     image: hermes:1.6.0-1c1cf029
     depends_on:
       - "neutron-node"
       - "gaia-node"
-      - "osmosis-node"
+      #- "osmosis-node"
     networks:
       - neutron-testing
 
@@ -73,7 +71,7 @@ services:
     depends_on:
       - "neutron-node"
       - "gaia-node"
-      - "osmosis-node"
+      #- "osmosis-node"
     ports:
       - 9999:9999
     environment:
@@ -92,9 +90,9 @@ services:
       - RELAYER_TARGET_CHAIN_RPC_ADDR=tcp://gaia-node:26657
       - RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=cosmos
       - RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=cosmosvaloper
-      - RELAYER_TARGET_CHAIN_RPC_ADDR=tcp://osmosis-node:26657
-      - RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=osmosis
-      - RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=osmosisvaloper
+      #- RELAYER_TARGET_CHAIN_RPC_ADDR=tcp://osmosis-node:26657
+      #- RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=osmosis
+      #- RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=osmosisvaloper
       - RELAYER_TARGET_CHAIN_DEBUG=true
       - RELAYER_REGISTRY_ADDRESSES=
       - RELAYER_ALLOW_TX_QUERIES=true
