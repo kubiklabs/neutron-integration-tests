@@ -33,29 +33,32 @@ services:
       - RUN_BACKGROUND=0
     networks:
       - neutron-testing
-  # osmosis-node:
-  #   image: osmosis-node:latest
-  #   container_name: osmosis-node
-  #   volumes:
-  #     - data:/opt/osmosis/data
-  #   ports:
-  #     - 1316:1317
-  #     - 16657:26657
-  #     - 16656:26656
-  #     - 9090:9090
-  #   ports:
-  #     - 1325:1317
-  #     - 26665:26657
-  #     - 26664:26656
-  #     - 9094:9090
-  #   environment:
-  #     - BINARY=osmosisd
-  #     - CHAINID=test-3
-  #     - STAKEDENOM=uosmo
-  #     - ALLOW_ICA_EXEC=yes
-  #     - RUN_BACKGROUND=0
-    # networks:
-    #   - neutron-testing
+  osmosis-node:
+    image: osmosis-node:latest
+    container_name: osmosis-node
+    args:
+        RUNNER_IMAGE: golang:1.20.3-alpine3.17
+        GO_VERSION: "1.20"
+    volumes:
+      - ./scripts/nativeDenomPoolA.json:/osmosis/nativeDenomPoolA.json
+      - ./scripts/nativeDenomPoolB.json:/osmosis/nativeDenomPoolB.json
+      - ./scripts/nativeDenomThreeAssetPool.json:/osmosis/nativeDenomThreeAssetPool.json
+      - ./scripts/stableswapPool.json:/osmosis/stableswapPool.json
+      - ./scripts/setup.sh:/osmosis/setup.sh
+      - ../cl-genesis-positions:/osmosis/cl-genesis-positions
+      - $HOME/.osmosisd-local/:/osmosis/.osmosisd/
+    entrypoint:
+      - /osmosis/setup.sh
+    command:
+      - $STATE
+    ports:
+      - 26665:26657
+      - 1325:1317
+      - 9094:9090
+      - 9091:9091
+      - 6060:6060
+    networks:
+      - neutron-testing
   hermes:
     image: hermes:1.6.0-1c1cf029
     depends_on:

@@ -19,7 +19,9 @@ RUN apk add --no-cache \
 
 # Download go dependencies
 WORKDIR /osmosis
-COPY go.mod go.sum ./
+# COPY go.mod go.sum ./
+COPY --from=app go.mod go.sum ./
+
 RUN --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=cache,target=/root/go/pkg/mod \
     go mod download
@@ -49,8 +51,8 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
             -X github.com/cosmos/cosmos-sdk/version.BuildTags=netgo,ledger,muslc \
             -w -s -linkmode=external -extldflags '-Wl,-z,muldefs -static'" \
         -trimpath \
-        -o /osmosis/build/osmosisd \
-        /osmosis/cmd/osmosisd/main.go
+        -o build/osmosisd \
+        cmd/osmosisd/main.go
 
 # --------------------------------------------------------
 # Runner

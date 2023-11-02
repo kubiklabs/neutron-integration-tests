@@ -4,8 +4,8 @@ COMPOSE ?= docker-compose
 build-gaia:
 		@docker buildx build --load --build-context app=$(APP_DIR)/gaia --build-context setup=$(APP_DIR)/neutron/network -t gaia-node -f dockerbuilds/Dockerfile.gaia --build-arg BINARY=gaiad .
 
-#build-osmosis:
-#		@docker buildx build --load --build-context app=$(APP_DIR)/osmosis --build-context setup=$(APP_DIR)/neutron/network -t osmosis-node -f dockerbuilds/Dockerfile.osmosis --build-arg BINARY=osmosisd .
+build-osmosis:
+		@docker buildx build --load --build-context app=$(APP_DIR)/osmosis --build-context setup=$(APP_DIR)/neutron/network -t osmosis-node -f dockerbuilds/Dockerfile.osmosis --build-arg BINARY=osmosisd .
 
 build-neutron:
 		cd $(APP_DIR)/neutron && $(MAKE) build-docker-image
