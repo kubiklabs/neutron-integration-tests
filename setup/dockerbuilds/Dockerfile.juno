@@ -17,10 +17,12 @@ FROM alpine:latest
 WORKDIR /opt/juno/
 COPY --from=setupj . setupj/
 ARG BINARY
-COPY --from=builderj /go/bin/${BINARY:-junod} /usr/local/bin/
+COPY --from=builderj /go/bin/${BINARY:-gaiad} /usr/local/bin/
 
 EXPOSE 26656 26657 1317 9090
 USER 0
+
+# STAKEDENOM:-ujuno
 
 CMD sh /opt/juno/setupj/init.sh && \
   sh /opt/juno/setupj/init-junod.sh && \
