@@ -68,7 +68,7 @@ services:
   #   networks:
   #     - neutron-testing
 
-  relayer:
+  relayerg:
     image: neutron-org/neutron-query-relayer
     entrypoint: ./run.sh
     volumes:

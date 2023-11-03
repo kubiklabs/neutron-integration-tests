@@ -14,4 +14,4 @@ CMD /app/network/hermesj/restore-keysj.sh && \
     /app/network/hermesj/create-connj.sh && \
     hermes --config /app/network/hermesj/config.toml create channel --a-chain neutron-test-1 --a-connection connection-0 --a-port transfer --b-port transfer && \
     sleep 20 && \
-    /app/network/hermes/start.sh
+    /app/network/hermesj/start.sh
