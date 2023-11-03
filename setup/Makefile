@@ -3,6 +3,8 @@ COMPOSE ?= docker-compose
 
 build-gaia:
 		@docker buildx build --load --build-context app=$(APP_DIR)/gaia --build-context setup=$(APP_DIR)/neutron/network -t gaia-node -f dockerbuilds/Dockerfile.gaia --build-arg BINARY=gaiad .
+build-juno:
+		@docker buildx build --load --build-context app=$(APP_DIR)/gaia --build-context setup=$(APP_DIR)/neutron/network -t juno-node -f dockerbuilds/Dockerfile.juno --build-arg BINARY=junod .
 
 build-neutron:
 		cd $(APP_DIR)/neutron && $(MAKE) build-docker-image
@@ -13,7 +15,7 @@ build-hermes:
 build-relayer:
 		cd $(APP_DIR)/neutron-query-relayer/ && make build-docker
 
-build-all: build-gaia build-neutron build-hermes build-relayer
+build-all: build-gaia build-juno build-neutron build-hermes build-relayer
 
 start-cosmopark: build-neutron build-relayer
 		@$(COMPOSE) up -d

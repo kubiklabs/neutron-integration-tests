@@ -27,14 +27,32 @@ services:
       - 9090:9090
     environment:
       - BINARY=gaiad
-      - CHAINID=test-2
+      - CHAINID=gaia-test-2
       - STAKEDENOM=uatom
       - ALLOW_ICA_EXEC=yes
       - RUN_BACKGROUND=0
     networks:
       - neutron-testing
+  juno-node:
+    image: juno-node:latest
+    container_name: juno-node
+    volumes:
+      - data:/opt/juno/data
+    ports:
+      - 1315:1317
+      - 36657:26657
+      - 36656:26656
+      - 7090:9090
+    environment:
+      - BINARY=junod
+      - CHAINID=juno-test-3
+      - STAKEDENOM=ujuno
+      - ALLOW_ICA_EXEC=yes
+      - RUN_BACKGROUND=0
+    networks:
+      - neutron-testing
 
-  hermes:
+  hermesg:
     image: hermes:1.6.0-1c1cf029
     depends_on:
       - "neutron-node"
@@ -42,7 +60,15 @@ services:
     networks:
       - neutron-testing
 
-  relayer:
+  hermesj:
+    image: hermes:1.6.0-1c1cf029
+    depends_on:
+      - "neutron-node"
+      - "juno-node"
+    networks:
+      - neutron-testing
+
+  relayerg:
     image: neutron-org/neutron-query-relayer
     entrypoint: ./run.sh
     volumes:
@@ -74,6 +100,42 @@ services:
       - RELAYER_ALLOW_KV_CALLBACKS=true
       - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldb
       - RELAYER_LISTEN_ADDR=0.0.0.0:9999
+      - LOGGER_LEVEL=debug
+    networks:
+      - neutron-testing
+
+  relayerj:
+    image: neutron-org/neutron-query-relayer
+    entrypoint: ./run.sh
+    volumes:
+      - data:/data
+    depends_on:
+      - "neutron-node"
+      - "juno-node"
+    ports:
+      - 8999:9999
+    environment:
+      - NODE=neutron-node
+      - RELAYER_NEUTRON_CHAIN_CHAIN_PREFIX=neutron
+      - RELAYER_NEUTRON_CHAIN_RPC_ADDR=tcp://neutron-node:26657
+      - RELAYER_NEUTRON_CHAIN_REST_ADDR=http://neutron-node:1317
+      - RELAYER_NEUTRON_CHAIN_HOME_DIR=/data/neutron-test-1
+      - RELAYER_NEUTRON_CHAIN_SIGN_KEY_NAME=demowallet3
+      - RELAYER_NEUTRON_CHAIN_GAS_PRICES=0.5untrn
+      - RELAYER_NEUTRON_CHAIN_GAS_ADJUSTMENT=1.4
+      - RELAYER_NEUTRON_CHAIN_CONNECTION_ID=connection-0
+      - RELAYER_NEUTRON_CHAIN_DEBUG=true
+      - RELAYER_NEUTRON_CHAIN_ACCOUNT_PREFIX=neutron
+      - RELAYER_NEUTRON_CHAIN_KEYRING_BACKEND=test
+      - RELAYER_TARGET_CHAIN_RPC_ADDRJ=tcp://juno-node:26657
+      - RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=juno
+      - RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=junovaloper
+      - RELAYER_TARGET_CHAIN_DEBUG=true
+      - RELAYER_REGISTRY_ADDRESSES=
+      - RELAYER_ALLOW_TX_QUERIES=true
+      - RELAYER_ALLOW_KV_CALLBACKS=true
+      - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldb
+      - RELAYER_LISTEN_ADDR=0.0.0.0:8999
       - LOGGER_LEVEL=debug
     networks:
       - neutron-testing
