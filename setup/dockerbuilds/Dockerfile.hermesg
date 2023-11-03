@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y wget && \
     mv ./hermes /usr/local/bin/ && \
     rm -rf "$TARNAME"
 
-CMD /app/network/hermes/restore-keys.sh && \
-    /app/network/hermes/create-conn.sh && \
+CMD /app/network/hermes/restore-keysg.sh && \
+    /app/network/hermes/create-conng.sh && \
     hermes --config /app/network/hermes/config.toml create channel --a-chain neutron-test-1 --a-connection connection-0 --a-port transfer --b-port transfer && \
     sleep 20 && \
     /app/network/hermes/start.sh

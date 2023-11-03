@@ -2,7 +2,7 @@
 set -e
 
 # Load shell variables
-. ./network/hermes/variables.sh
+. ./network/hermesj/variables.sh
 
 ### Sleep is needed otherwise the relayer crashes when trying to init
 sleep 1

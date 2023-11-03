@@ -2,7 +2,7 @@
 set -e
 
 # Load shell variables
-. ./network/hermes/variables.sh
+. ./network/hermesj/variables.sh
 
 ### Configure the clients and connection
 
