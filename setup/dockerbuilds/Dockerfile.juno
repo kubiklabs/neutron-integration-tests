@@ -24,6 +24,6 @@ USER 0
 
 # STAKEDENOM:-ujuno
 
-CMD sh /opt/juno/setupj/init.sh && \
+CMD sh /opt/juno/setupj/init_junod_start.sh && \
   sh /opt/juno/setupj/init-junod.sh && \
   sh /opt/juno/setupj/start.sh
