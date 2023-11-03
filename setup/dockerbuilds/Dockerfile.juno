@@ -2,7 +2,7 @@
 
 FROM golang:1.18-alpine AS builderj
 RUN apk upgrade -U -a
-WORKDIR /src/appj/
+WORKDIR /src/app/
 COPY --from=appj go.mod go.sum* ./
 RUN go mod download
 COPY --from=appj . .
@@ -11,14 +11,14 @@ RUN apk add --no-cache $PACKAGES
 RUN CGO_ENABLED=0 make install
 
 FROM alpine:latest
-WORKDIR /opt/node/
+WORKDIR /opt/nodej/
 COPY --from=setupj . setupj/
 ARG BINARY
-COPY --from=builderj /go/bin/${BINARY:-junod} /usr/local/bin/
+COPY --from=builderj /go/bin/${BINARY:-gaiad} /usr/local/bin/
 
 EXPOSE 26656 26657 1317 9090
 USER 0
 
-CMD sh /opt/node/setupj/init.sh && \
-  sh /opt/node/setupj/init-junod.sh && \
-  sh /opt/node/setupj/start.sh
+CMD sh /opt/nodej/setupj/init.sh && \
+  sh /opt/nodej/setupj/init-junod.sh && \
+  sh /opt/nodej/setupj/start.sh
