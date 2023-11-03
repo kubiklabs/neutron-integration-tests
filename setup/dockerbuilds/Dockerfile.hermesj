@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y wget && \
     TARNAME="hermes-${VERSION}-${PLATFORM}-unknown-linux-gnu.tar.gz" && \
     wget "https://github.com/informalsystems/hermes/releases/download/${VERSION}/${TARNAME}" && \
     tar -xf "$TARNAME" && \
-    mv ./hermesj /usr/local/bin/ && \
+    mv ./hermes /usr/local/bin/ && \
     rm -rf "$TARNAME"
 
 CMD /app/network/hermesj/restore-keysj.sh && \
