@@ -11,14 +11,14 @@ RUN apk add --no-cache $PACKAGES
 RUN CGO_ENABLED=0 make install
 
 FROM alpine:latest
-WORKDIR /opt/nodej/
+WORKDIR /opt/juno/
 COPY --from=setupj . setupj/
 ARG BINARY
-COPY --from=builderj /go/bin/${BINARY:-gaiad} /usr/local/bin/
+COPY --from=builderj /go/bin/${BINARY:-junod} /usr/local/bin/
 
 EXPOSE 26656 26657 1317 9090
 USER 0
 
-CMD sh /opt/nodej/setupj/init.sh && \
-  sh /opt/nodej/setupj/init-junod.sh && \
-  sh /opt/nodej/setupj/start.sh
+CMD sh /opt/juno/setupj/init.sh && \
+  sh /opt/juno/setupj/init-junod.sh && \
+  sh /opt/juno/setupj/start.sh

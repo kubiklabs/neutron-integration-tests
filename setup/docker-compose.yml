@@ -44,7 +44,7 @@ services:
       - 36656:26656
       - 7090:9090
     environment:
-      - BINARY=gaiad
+      - BINARY=junod
       - CHAINID=juno-test-3
       - STAKEDENOM=ujuno
       - ALLOW_ICA_EXEC=yes
