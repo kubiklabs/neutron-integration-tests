@@ -2,7 +2,7 @@
 
 FROM golang:1.18-alpine AS builderj
 RUN apk upgrade -U -a
-WORKDIR /src/app/
+WORKDIR /src/appj/
 COPY --from=appj go.mod go.sum* ./
 RUN go mod download
 COPY --from=appj . .
