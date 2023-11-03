@@ -98,7 +98,7 @@ services:
       - RELAYER_REGISTRY_ADDRESSES=
       - RELAYER_ALLOW_TX_QUERIES=true
       - RELAYER_ALLOW_KV_CALLBACKS=true
-      - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldb
+      - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldbg
       - RELAYER_LISTEN_ADDR=0.0.0.0:9999
       - LOGGER_LEVEL=debug
     networks:
@@ -134,7 +134,7 @@ services:
       - RELAYER_REGISTRY_ADDRESSES=
       - RELAYER_ALLOW_TX_QUERIES=true
       - RELAYER_ALLOW_KV_CALLBACKS=true
-      - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldb
+      - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldbj
       - RELAYER_LISTEN_ADDR=0.0.0.0:8999
       - LOGGER_LEVEL=debug
     networks:
