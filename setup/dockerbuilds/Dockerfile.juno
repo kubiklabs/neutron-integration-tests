@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.18-alpine AS builder
+FROM golang:1.18-alpine AS builderj
 RUN apk upgrade -U -a
 WORKDIR /src/app/
 COPY --from=app go.mod go.sum* ./
@@ -14,7 +14,7 @@ FROM alpine:latest
 WORKDIR /opt/node/
 COPY --from=setup . setup/
 ARG BINARY
-COPY --from=builder /go/bin/${BINARY:-junod} /usr/local/bin/
+COPY --from=builderj /go/bin/${BINARY:-junod} /usr/local/bin/
 
 EXPOSE 26656 26657 1317 9090
 USER 0
