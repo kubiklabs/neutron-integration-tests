@@ -5,7 +5,7 @@ build-gaia:
 		@docker buildx build --load --build-context app=$(APP_DIR)/gaia --build-context setup=$(APP_DIR)/neutron/network -t gaia-node -f dockerbuilds/Dockerfile.gaia --build-arg BINARY=gaiad .
 
 build-juno:
-		@docker buildx build --load --build-context appj=$(APP_DIR)/juno --build-context setupj=$(APP_DIR)/neutron/network -t juno-node -f dockerbuilds/Dockerfile.juno --build-arg BINARY=gaiad --progress=plain .
+		@docker buildx build --load --build-context appj=$(APP_DIR)/gaia --build-context setupj=$(APP_DIR)/neutron/network -t juno-node -f dockerbuilds/Dockerfile.juno --build-arg BINARY=gaiad --progress=plain .
 
 build-neutron:
 		cd $(APP_DIR)/neutron && $(MAKE) build-docker-image
@@ -13,8 +13,8 @@ build-neutron:
 build-hermesg:
 		@docker build -f dockerbuilds/Dockerfile.hermesg -t hermes:1.6.0-1c1cf029 .
 
-# build-hermesj:
-# 		@docker build -f dockerbuilds/Dockerfile.hermesj -t hermes:1.6.0-1c1cf029 .
+build-hermesj:
+		@docker build -f dockerbuilds/Dockerfile.hermesj -t hermes:1.6.0-1c1cf029 .
 
 build-relayer:
 		cd $(APP_DIR)/neutron-query-relayer/ && make build-docker
@@ -22,7 +22,7 @@ build-relayer:
 build-relayer-juno:
 		cd $(APP_DIR)/neutron-query-relayer-juno/ && make build-docker
 
-build-all: build-gaia build-juno build-neutron build-hermesg build-relayer
+build-all: build-gaia build-juno build-neutron build-hermesg build-hermesj build-relayer
 
 start-cosmopark: build-neutron build-relayer
 		@$(COMPOSE) up -d
