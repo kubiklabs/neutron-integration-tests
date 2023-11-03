@@ -24,7 +24,7 @@ build-relayer-juno:
 
 build-all: build-gaia build-juno build-neutron build-hermesg build-relayer build-relayer-juno
 
-start-cosmopark: build-neutron build-relayer build-relayer-juno
+start-cosmopark: build-neutron build-relayer
 		@$(COMPOSE) up -d
 
 start-cosmopark-no-rebuild:
