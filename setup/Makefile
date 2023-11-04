@@ -10,11 +10,8 @@ build-juno:
 build-neutron:
 		cd $(APP_DIR)/neutron && $(MAKE) build-docker-image
 
-build-hermesg:
-		@docker build -f dockerbuilds/Dockerfile.hermesg -t hermes:1.6.0-1c1cf029 .
-
-build-hermesj:
-		@docker build -f dockerbuilds/Dockerfile.hermesj -t hermesj:1.6.0-1c1cf029 .
+build-hermes:
+		@docker build -f dockerbuilds/Dockerfile.hermes -t hermes:1.6.0-1c1cf029 .
 
 build-relayer:
 		cd $(APP_DIR)/neutron-query-relayer/ && make build-docker
@@ -22,7 +19,7 @@ build-relayer:
 build-relayer-juno:
 		cd $(APP_DIR)/neutron-query-relayer-juno/ && make build-docker
 
-build-all: build-gaia build-juno build-neutron build-hermesg build-hermesj build-relayer build-relayer-juno
+build-all: build-gaia build-juno build-neutron build-hermes build-relayer build-relayer-juno
 
 start-cosmopark: build-neutron build-relayer build-relayer-juno
 		@$(COMPOSE) up -d

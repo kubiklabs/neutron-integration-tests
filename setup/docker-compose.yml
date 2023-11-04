@@ -52,18 +52,11 @@ services:
     networks:
       - neutron-testing
 
-  hermesg:
+  hermes:
     image: hermes:1.6.0-1c1cf029
     depends_on:
       - "neutron-node"
       - "gaia-node"
-    networks:
-      - neutron-testing
-
-  hermesj:
-    image: hermesj:1.6.0-1c1cf029
-    depends_on:
-      - "neutron-node"
       - "juno-node"
     networks:
       - neutron-testing
@@ -120,7 +113,7 @@ services:
       - RELAYER_NEUTRON_CHAIN_RPC_ADDR=tcp://neutron-node:26657
       - RELAYER_NEUTRON_CHAIN_REST_ADDR=http://neutron-node:1317
       - RELAYER_NEUTRON_CHAIN_HOME_DIR=/data/neutron-test-1
-      - RELAYER_NEUTRON_CHAIN_SIGN_KEY_NAME=demowallet3
+      - RELAYER_NEUTRON_CHAIN_SIGN_KEY_NAME=demowallet4
       - RELAYER_NEUTRON_CHAIN_GAS_PRICES=0.5untrn
       - RELAYER_NEUTRON_CHAIN_GAS_ADJUSTMENT=1.4
       - RELAYER_NEUTRON_CHAIN_CONNECTION_ID=connection-1
