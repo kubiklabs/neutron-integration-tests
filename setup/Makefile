@@ -22,7 +22,7 @@ build-relayer:
 build-relayer-juno:
 		cd $(APP_DIR)/neutron-query-relayer-juno/ && make build-docker
 
-build-all: build-gaia build-juno build-neutron build-hermesg build-hermesj build-relayer build-relayer-juno:
+build-all: build-gaia build-juno build-neutron build-hermesg build-hermesj build-relayer build-relayer-juno
 
 start-cosmopark: build-neutron build-relayer build-relayer-juno
 		@$(COMPOSE) up -d
