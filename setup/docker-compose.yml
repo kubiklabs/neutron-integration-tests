@@ -104,41 +104,41 @@ services:
     networks:
       - neutron-testing
 
-  # relayerj:
-  #   image: neutron-org/neutron-query-relayer-juno
-  #   entrypoint: ./run.sh
-  #   volumes:
-  #     - data:/data
-  #   depends_on:
-  #     - "neutron-node"
-  #     - "juno-node"
-  #   ports:
-  #     - 8999:9999
-  #   environment:
-  #     - NODE=neutron-node
-  #     - RELAYER_NEUTRON_CHAIN_CHAIN_PREFIX=neutron
-  #     - RELAYER_NEUTRON_CHAIN_RPC_ADDR=tcp://neutron-node:26657
-  #     - RELAYER_NEUTRON_CHAIN_REST_ADDR=http://neutron-node:1317
-  #     - RELAYER_NEUTRON_CHAIN_HOME_DIR=/data/neutron-test-1
-  #     - RELAYER_NEUTRON_CHAIN_SIGN_KEY_NAME=demowallet3
-  #     - RELAYER_NEUTRON_CHAIN_GAS_PRICES=0.5untrn
-  #     - RELAYER_NEUTRON_CHAIN_GAS_ADJUSTMENT=1.4
-  #     - RELAYER_NEUTRON_CHAIN_CONNECTION_ID=connection-0
-  #     - RELAYER_NEUTRON_CHAIN_DEBUG=true
-  #     - RELAYER_NEUTRON_CHAIN_ACCOUNT_PREFIX=neutron
-  #     - RELAYER_NEUTRON_CHAIN_KEYRING_BACKEND=test
-  #     - RELAYER_TARGET_CHAIN_RPC_ADDR=tcp://juno-node:26657
-  #     - RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=juno
-  #     - RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=junovaloper
-  #     - RELAYER_TARGET_CHAIN_DEBUG=true
-  #     - RELAYER_REGISTRY_ADDRESSES=
-  #     - RELAYER_ALLOW_TX_QUERIES=true
-  #     - RELAYER_ALLOW_KV_CALLBACKS=true
-  #     - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldbj
-  #     - RELAYER_LISTEN_ADDR=0.0.0.0:8999
-  #     - LOGGER_LEVEL=debug
-  #   networks:
-  #     - neutron-testing
+  relayerj:
+    image: neutron-org/neutron-query-relayer-juno
+    entrypoint: ./run.sh
+    volumes:
+      - data:/data
+    depends_on:
+      - "neutron-node"
+      - "juno-node"
+    ports:
+      - 8999:9999
+    environment:
+      - NODE=neutron-node
+      - RELAYER_NEUTRON_CHAIN_CHAIN_PREFIX=neutron
+      - RELAYER_NEUTRON_CHAIN_RPC_ADDR=tcp://neutron-node:26657
+      - RELAYER_NEUTRON_CHAIN_REST_ADDR=http://neutron-node:1317
+      - RELAYER_NEUTRON_CHAIN_HOME_DIR=/data/neutron-test-1
+      - RELAYER_NEUTRON_CHAIN_SIGN_KEY_NAME=demowallet3
+      - RELAYER_NEUTRON_CHAIN_GAS_PRICES=0.5untrn
+      - RELAYER_NEUTRON_CHAIN_GAS_ADJUSTMENT=1.4
+      - RELAYER_NEUTRON_CHAIN_CONNECTION_ID=connection-0
+      - RELAYER_NEUTRON_CHAIN_DEBUG=true
+      - RELAYER_NEUTRON_CHAIN_ACCOUNT_PREFIX=neutron
+      - RELAYER_NEUTRON_CHAIN_KEYRING_BACKEND=test
+      - RELAYER_TARGET_CHAIN_RPC_ADDR=tcp://juno-node:26657
+      - RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=cosmos
+      - RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=cosmosvaloper
+      - RELAYER_TARGET_CHAIN_DEBUG=true
+      - RELAYER_REGISTRY_ADDRESSES=
+      - RELAYER_ALLOW_TX_QUERIES=true
+      - RELAYER_ALLOW_KV_CALLBACKS=true
+      - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldbj
+      - RELAYER_LISTEN_ADDR=0.0.0.0:8999
+      - LOGGER_LEVEL=debug
+    networks:
+      - neutron-testing
 
 volumes:
   data:
