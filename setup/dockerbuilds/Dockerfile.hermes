@@ -16,4 +16,6 @@ CMD /app/network/hermes/restore-keys.sh && \
     sleep 20 && \
     hermes --config /app/network/hermes/config.toml create channel --a-chain neutron-test-1 --b-chain juno-test-3 --a-port transfer --b-port transfer --new-client-connection && \
     sleep 20 && \
-    /app/network/hermes/start.sh
+    /app/network/hermes/start.sh && \
+    /app/network/hermes/tokentransfer.sh
+
