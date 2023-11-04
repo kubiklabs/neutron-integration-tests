@@ -13,8 +13,8 @@ build-neutron:
 build-hermesg:
 		@docker build -f dockerbuilds/Dockerfile.hermesg -t hermes:1.6.0-1c1cf029 .
 
-# build-hermesj:
-# 		@docker build -f dockerbuilds/Dockerfile.hermesj -t hermes:1.6.0-1c1cf029 .
+build-hermesj:
+		@docker build -f dockerbuilds/Dockerfile.hermesj -t hermes:1.6.0-1c1cf029 .
 
 build-relayer:
 		cd $(APP_DIR)/neutron-query-relayer/ && make build-docker
