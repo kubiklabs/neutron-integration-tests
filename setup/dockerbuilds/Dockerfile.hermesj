@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y wget && \
 
 # Add execute permission to the script
 RUN chmod +x /app/network/hermesj/restore-keysj.sh
+RUN chmod +x /app/network/hermesj/create-connj.sh
+RUN chmod +x /app/network/hermesj/start.sh
 
 CMD /app/network/hermesj/restore-keysj.sh && \
     /app/network/hermesj/create-connj.sh && \
