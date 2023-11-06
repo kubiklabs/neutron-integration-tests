@@ -139,7 +139,7 @@ rpc_addr = 'http://juno-node:26657'
 grpc_addr = 'http://juno-node:9090'
 event_source = { mode = 'push', url = 'ws://juno-node:26657/websocket', batch_delay = '200ms' }
 rpc_timeout = '10s'
-account_prefix = 'cosmos'
+account_prefix = 'juno'
 key_name = 'testkey_4'
 store_prefix = 'ibc'
 default_gas = 100000
