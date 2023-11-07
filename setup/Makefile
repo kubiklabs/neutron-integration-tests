@@ -22,7 +22,7 @@ build-relayer:
 build-relayer-juno:
 		cd $(APP_DIR)/neutron-query-relayer-juno/ && make build-docker
 
-build-relayer-juno:
+build-relayer-osmo:
 		cd $(APP_DIR)/neutron-query-relayer-osmo/ && make build-docker
 
 build-all: build-gaia build-juno build-osmo build-neutron build-hermes build-relayer build-relayer-juno build-relayer-osmo
