@@ -7,6 +7,9 @@ build-gaia:
 build-juno:
 		@docker buildx build --load --build-context app=$(APP_DIR)/changegaia/gaia --build-context setup=$(APP_DIR)/neutron/network -t juno-node -f dockerbuilds/Dockerfile.juno --build-arg BINARY=gaiad --progress=plain .
 
+build-osmo:
+		@docker buildx build --load --build-context app=$(APP_DIR)/changegaia/osmo --build-context setup=$(APP_DIR)/neutron/network -t juno-node -f dockerbuilds/Dockerfile.osmo --build-arg BINARY=gaiad --progress=plain .
+
 build-neutron:
 		cd $(APP_DIR)/neutron && $(MAKE) build-docker-image
 
@@ -19,9 +22,12 @@ build-relayer:
 build-relayer-juno:
 		cd $(APP_DIR)/neutron-query-relayer-juno/ && make build-docker
 
-build-all: build-gaia build-juno build-neutron build-hermes build-relayer build-relayer-juno
+build-relayer-juno:
+		cd $(APP_DIR)/neutron-query-relayer-osmo/ && make build-docker
 
-start-cosmopark: build-neutron build-relayer build-relayer-juno
+build-all: build-gaia build-juno build-osmo build-neutron build-hermes build-relayer build-relayer-juno build-relayer-osmo
+
+start-cosmopark: build-neutron build-relayer build-relayer-juno build-relayer-osmo
 		@$(COMPOSE) up -d
 
 start-cosmopark-no-rebuild:

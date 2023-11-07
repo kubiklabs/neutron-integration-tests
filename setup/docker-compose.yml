@@ -51,6 +51,24 @@ services:
       - RUN_BACKGROUND=0
     networks:
       - neutron-testing
+  osmo-node:
+    image: osmo-node:latest
+    container_name: osmo-node
+    volumes:
+      - data:/opt/osmo/data
+    ports:
+      - 1314:1317
+      - 46657:26657
+      - 46656:26656
+      - 6090:9090
+    environment:
+      - BINARY=gaiad
+      - CHAINID=osmo-test-3
+      - STAKEDENOM=uosmo
+      - ALLOW_ICA_EXEC=yes
+      - RUN_BACKGROUND=0
+    networks:
+      - neutron-testing
 
   hermes:
     image: hermes:1.6.0-1c1cf029
@@ -58,6 +76,7 @@ services:
       - "neutron-node"
       - "gaia-node"
       - "juno-node"
+      - "osmo-node"
     networks:
       - neutron-testing
 
@@ -129,6 +148,42 @@ services:
       - RELAYER_ALLOW_KV_CALLBACKS=true
       - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldbj
       - RELAYER_LISTEN_ADDR=0.0.0.0:8999
+      - LOGGER_LEVEL=debug
+    networks:
+      - neutron-testing
+
+  relayero:
+    image: neutron-org/neutron-query-relayer-osmo
+    entrypoint: ./run.sh
+    volumes:
+      - data:/data
+    depends_on:
+      - "neutron-node"
+      - "osmo-node"
+    ports:
+      - 7999:9999
+    environment:
+      - NODE=neutron-node
+      - RELAYER_NEUTRON_CHAIN_CHAIN_PREFIX=neutron
+      - RELAYER_NEUTRON_CHAIN_RPC_ADDR=tcp://neutron-node:26657
+      - RELAYER_NEUTRON_CHAIN_REST_ADDR=http://neutron-node:1317
+      - RELAYER_NEUTRON_CHAIN_HOME_DIR=/data/neutron-test-1
+      - RELAYER_NEUTRON_CHAIN_SIGN_KEY_NAME=demowallet4
+      - RELAYER_NEUTRON_CHAIN_GAS_PRICES=0.5untrn
+      - RELAYER_NEUTRON_CHAIN_GAS_ADJUSTMENT=1.4
+      - RELAYER_NEUTRON_CHAIN_CONNECTION_ID=connection-2
+      - RELAYER_NEUTRON_CHAIN_DEBUG=true
+      - RELAYER_NEUTRON_CHAIN_ACCOUNT_PREFIX=neutron
+      - RELAYER_NEUTRON_CHAIN_KEYRING_BACKEND=test
+      - RELAYER_TARGET_CHAIN_RPC_ADDR=tcp://osmo-node:26657
+      - RELAYER_TARGET_CHAIN_ACCOUNT_PREFIX=osmo
+      - RELAYER_TARGET_CHAIN_VALIDATOR_ACCOUNT_PREFIX=osmovaloper
+      - RELAYER_TARGET_CHAIN_DEBUG=true
+      - RELAYER_REGISTRY_ADDRESSES=
+      - RELAYER_ALLOW_TX_QUERIES=true
+      - RELAYER_ALLOW_KV_CALLBACKS=true
+      - RELAYER_STORAGE_PATH=/data/relayer/storage/leveldbo
+      - RELAYER_LISTEN_ADDR=0.0.0.0:7999
       - LOGGER_LEVEL=debug
     networks:
       - neutron-testing
