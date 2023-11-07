@@ -8,7 +8,7 @@ build-juno:
 		@docker buildx build --load --build-context app=$(APP_DIR)/changegaia/gaia --build-context setup=$(APP_DIR)/neutron/network -t juno-node -f dockerbuilds/Dockerfile.juno --build-arg BINARY=gaiad --progress=plain .
 
 build-osmo:
-		@docker buildx build --load --build-context app=$(APP_DIR)/changegaia/osmo --build-context setup=$(APP_DIR)/neutron/network -t juno-node -f dockerbuilds/Dockerfile.osmo --build-arg BINARY=gaiad --progress=plain .
+		@docker buildx build --load --build-context app=$(APP_DIR)/changegaia/osmo --build-context setup=$(APP_DIR)/neutron/network -t osmo-node -f dockerbuilds/Dockerfile.osmo --build-arg BINARY=gaiad --progress=plain .
 
 build-neutron:
 		cd $(APP_DIR)/neutron && $(MAKE) build-docker-image
