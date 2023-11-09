@@ -63,7 +63,7 @@ services:
       - 6090:9090
     environment:
       - BINARY=gaiad
-      - CHAINID=osmo-test-4
+      - CHAINID=osmosis-test-4
       - STAKEDENOM=uosmo
       - ALLOW_ICA_EXEC=yes
       - RUN_BACKGROUND=0

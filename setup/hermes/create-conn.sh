@@ -18,7 +18,7 @@ done
 
 sleep 2
 
-while ! $HERMES_BINARY --config $CONFIG_DIR create connection --a-chain neutron-test-1 --b-chain osmo-test-4; do
+while ! $HERMES_BINARY --config $CONFIG_DIR create connection --a-chain neutron-test-1 --b-chain osmosis-test-4; do
   sleep 1
 done
 

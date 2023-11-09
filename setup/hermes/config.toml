@@ -107,7 +107,7 @@ max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
 max_block_time = '10s'
-trusting_period = '1800s'
+trusting_period = '300s'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'cosmos' }
 
@@ -128,7 +128,7 @@ max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
 max_block_time = '10s'
-trusting_period = '1800s'
+trusting_period = '300s'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'cosmos' }
 
@@ -150,12 +150,12 @@ max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
 max_block_time = '10s'
-trusting_period = '1800s'
+trusting_period = '300s'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'cosmos' }
 
 [[chains]]
-id = 'osmo-test-4'
+id = 'osmosis-test-4'
 rpc_addr = 'http://osmo-node:26657'
 grpc_addr = 'http://osmo-node:9090'
 event_source = { mode = 'push', url = 'ws://osmo-node:26657/websocket', batch_delay = '200ms' }
@@ -171,6 +171,6 @@ max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
 max_block_time = '10s'
-trusting_period = '1800s'
+trusting_period = '300s'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'cosmos' }

@@ -18,7 +18,7 @@ CMD /app/network/hermes/restore-keys.sh && \
     # sleep 20 && \
     # hermes --config /app/network/hermes/config.toml create channel --a-chain neutron-test-1 --b-chain juno-test-3 --a-port transfer --b-port transfer --new-client-connection && \
     # sleep 20 && \
-    # hermes --config /app/network/hermes/config.toml create channel --a-chain neutron-test-1 --b-chain osmo-test-4 --a-port transfer --b-port transfer --new-client-connection && \
+    # hermes --config /app/network/hermes/config.toml create channel --a-chain neutron-test-1 --b-chain osmosis-test-4 --a-port transfer --b-port transfer --new-client-connection && \
     # sleep 20 && \
     hermes --config /app/network/hermes/config.toml create channel --a-chain neutron-test-1 --a-connection connection-0 --a-port transfer --b-port transfer && \
     sleep 20 && \
@@ -29,4 +29,12 @@ CMD /app/network/hermes/restore-keys.sh && \
     /app/network/hermes/start.sh && \
     sleep 20 && \
     /app/network/hermes/token-transfer.sh
+    # hermes tx ft-transfer --denom uatom --config ./network/hermes/config.toml --receiver neutron1m9l358xunhhwds0568za49mzhvuxx9ux8xafx2 --key-name testkey_3 --dst-chain neutron-test-1 --src-chain gaia-test-2 --src-port transfer --src-channel channel-0 --amount 30000000000000 && \
+    # sleep 2 && \
+
+    # hermes tx ft-transfer --denom ujuno --config ./network/hermes/config.toml --receiver neutron1m9l358xunhhwds0568za49mzhvuxx9ux8xafx2 --key-name testkey_4 --dst-chain neutron-test-1 --src-chain juno-test-3 --src-port transfer --src-channel channel-0 --amount 40000000000000 && \
+    # sleep 2 && \
+
+    # hermes tx ft-transfer --denom uosmo --config ./network/hermes/config.toml --receiver neutron1m9l358xunhhwds0568za49mzhvuxx9ux8xafx2 --key-name testkey_5 --dst-chain neutron-test-1 --src-chain osmosis-test-4 --src-port transfer --src-channel channel-0 --amount 50000000000000 && \
+    # sleep 2 && \
 
